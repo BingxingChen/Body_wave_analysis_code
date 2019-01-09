@@ -1,6 +1,6 @@
-% reference£ºJohn H. Long Jr ¡¶Flapping flexible fishPeriodic and secular body reconfigurations in swimming lamprey, Petromyzon marinus¡· 
+% referenceï¼šJohn H. Long Jr ã€ŠFlapping flexible fishPeriodic and secular body reconfigurations in swimming lamprey, Petromyzon marinusã€‹ 
 % by Bingxing Chen 20181121
-%   x/body_x£ºthe axial direction  y/body_y£ºthe lateral direction (not rotated)
+%   x/body_xï¼šthe axial direction  y/body_yï¼šthe lateral direction (not rotated)
 clc
 clear
 close all
@@ -15,8 +15,8 @@ NumFr=36-num_per_cycle;
 for strt_frm=1:NumFr% different cycles
 xData =body_x(strt_frm:strt_frm+1*num_per_cycle,:)';%% row: body points line:time series
 yData = body_y(strt_frm:strt_frm+1*num_per_cycle,:)';
-fishL =[];sz=size(xData);%%sz ÇóÈ¡Á½¸öÖµ sz(1)ĞĞ£º±íÊ¾ÓãÌåµÄÎ»ÖÃ Ìå³¤µÄÊı¾İ ÓĞ¶àÉÙ¸öÓãÌåµÄµã sz(2)ÁĞ£ºÊ±¼ä
-for il=1:sz(2)%±íÊ¾
+fishL =[];sz=size(xData);%%sz æ±‚å–ä¸¤ä¸ªå€¼ sz(1)è¡Œï¼šè¡¨ç¤ºé±¼ä½“çš„ä½ç½® ä½“é•¿çš„æ•°æ® æœ‰å¤šå°‘ä¸ªé±¼ä½“çš„ç‚¹ sz(2)åˆ—ï¼šæ—¶é—´
+for il=1:sz(2)%è¡¨ç¤º
 fishL(il) =sum(sqrt(diff(xData(:,il)).^2+diff(yData(:,il)).^2));
 end
 fishLength=mean(fishL); %the body length  
@@ -54,7 +54,7 @@ fprintf(1,'unsteadliness index is: %1.4f\n',UI)
 % fprintf(1,'unsteadliness index is: %1.4f\n',U.Ave_com(3)/51/3.9)
 
 %% the data are rotated so that the composite average velocity vectors points in the positive direction.
-% theta1=atan(U.Ave_ycom/U.Ave_xcom );%%ÔË¶¯·½Ïò¡£¡£¼´ÔË¶¯·½ÏòÓë´¹Ö±³Étheat½Ç¶È tempxÊµ¼ÊÊÇÍ¼Æ¬ÖĞµÄy×ø±ê¡£¡£tempyÊÇÏñËØÖĞµÄx
+% theta1=atan(U.Ave_ycom/U.Ave_xcom );%%è¿åŠ¨æ–¹å‘ã€‚ã€‚å³è¿åŠ¨æ–¹å‘ä¸å‚ç›´æˆtheatè§’åº¦ tempxå®é™…æ˜¯å›¾ç‰‡ä¸­çš„yåæ ‡ã€‚ã€‚tempyæ˜¯åƒç´ ä¸­çš„x
 theta1=atan2(U.Ave_ycom,U.Ave_xcom)
 % hqx = [body_x(1,:)',body_y(end,:)'];
 % hqy = [body_y(1,:)',body_x(end,:)'];
@@ -63,7 +63,7 @@ theta1=atan2(U.Ave_ycom,U.Ave_xcom)
 % ft = fittype( 'poly1' );
 % % Fit model to data.
 % [fitresult, gof] = fit( xD, yD, ft );
-% theta1 = atan(fitresult.p1);%%ÔË¶¯·½Ïò¡£¡£¼´ÔË¶¯·½ÏòÓë´¹Ö±³Étheat½Ç¶È tempxÊµ¼ÊÊÇÍ¼Æ¬ÖĞµÄy×ø±ê¡£¡£tempyÊÇÏñËØÖĞµÄx
+% theta1 = atan(fitresult.p1);%%è¿åŠ¨æ–¹å‘ã€‚ã€‚å³è¿åŠ¨æ–¹å‘ä¸å‚ç›´æˆtheatè§’åº¦ tempxå®é™…æ˜¯å›¾ç‰‡ä¸­çš„yåæ ‡ã€‚ã€‚tempyæ˜¯åƒç´ ä¸­çš„x
 X = cos(theta1)*body_x'+sin(theta1)*body_y';%%the axial direction
 Y = -sin(theta1)*body_x'+cos(theta1)*body_y';%the lateral direction
 X=X';Y=Y';
@@ -75,7 +75,7 @@ u_actualbody=X(str_frm_Interval,:);
 v_actualbody=Y(str_frm_Interval,:);
 H=[];H0=[];
 for i=str_frm_Interval%one cycle
-% H0=[i*timestep (i*timestep)^2/2  sin(DF*2*pi*i*timestep) cos(DF*2*pi*i*timestep) sin(2*DF*2*pi*i*timestep) cos(2*DF*2*pi*i*timestep) sin(3*DF*2*pi*i*timestep) cos(3*DF*2*pi*i*timestep) sin(4*DF*2*pi*i*timestep) cos(4*DF*2*pi*i*timestep)  ];
+% H0=[1 i*timestep (i*timestep)^2/2  sin(DF*2*pi*i*timestep) cos(DF*2*pi*i*timestep) sin(2*DF*2*pi*i*timestep) cos(2*DF*2*pi*i*timestep) sin(3*DF*2*pi*i*timestep) cos(3*DF*2*pi*i*timestep) sin(4*DF*2*pi*i*timestep) cos(4*DF*2*pi*i*timestep)  ];
 H0=[i*timestep (i*timestep)^2/2  sin(DF*2*pi*i*timestep) cos(DF*2*pi*i*timestep) sin(2*DF*2*pi*i*timestep) cos(2*DF*2*pi*i*timestep)  ];
 % H0=[1 i*timestep (i*timestep)^2/2  sin(DF*2*pi*i*timestep) cos(DF*2*pi*i*timestep) sin(2*DF*2*pi*i*timestep) cos(2*DF*2*pi*i*timestep)  ];
 H=[H;H0;];% 
@@ -85,7 +85,11 @@ end
 % u0=sum(u_actualbody)/size(u_actualbody,1);%the average value
 % v0=sum(v_actualbody)/size(v_actualbody,1);
 u0=u_actualbody(1,:);%the initial value
-v0=v_actualbody(1,:);%³õÊ¼Öµ
+v0=v_actualbody(1,:);%åˆå§‹å€¼
+%u0=0;%the initial value
+%v0=0;%åˆå§‹å€¼
+
+
 S_u=inv(H'*H)*H'*(u_actualbody-u0);%least square fitting method
 S_v=inv(H'*H)*H'*(v_actualbody-v0);%least square fitting method
 %lateral direction
@@ -127,7 +131,7 @@ u_average=sum(u_actualbody)/size(u_actualbody,1);
 v_average=sum(v_actualbody)/size(v_actualbody,1);
 u_SST=sum((u_actualbody-u_average).^2);
 u_SSE=sum((u_model-u_actualbody).^2);
-R_square_U_determination=1-u_SSE./u_SST;%ÄâºÏÏµÊı
+R_square_U_determination=1-u_SSE./u_SST;%æ‹Ÿåˆç³»æ•°
 
 v_average=sum(v_actualbody)/size(v_actualbody,1);
 v_average=sum(v_actualbody)/size(v_actualbody,1);
@@ -141,10 +145,10 @@ R_square_V_determination=fliplr(R_square_V_determination);%%
 % check the fitness of all points for a single cycle period
 Harmonic_structure_plot
 % figure
-% plot(1:n_points,unwrap(Lateral.phi_n),'r')%%ÓãÌå²¨µÄÍ¼
+% plot(1:n_points,unwrap(Lateral.phi_n),'r')%%é±¼ä½“æ³¢çš„å›¾
 % xlabel('body points)') ; ylabel('unwarp Phase changes') ;
 % figure
-% plot(1:n_points,Lateral.phi_n,'r')%%ÓãÌå²¨µÄÍ¼
+% plot(1:n_points,Lateral.phi_n,'r')%%é±¼ä½“æ³¢çš„å›¾
 % xlabel('body points)') ; ylabel('Phase changes') ;
 % figure
 % plot(str_frm_Interval,u_model,'k',str_frm_Interval,u_actualbody,'b' )
@@ -160,44 +164,44 @@ Harmonic_structure_plot
 % title('The v model and v_actualbody of tail point')
 % body wave: check the fitness of a body wave  (raw data(rotated)   and reconfiguration data)
 % figure
-% plot(u_actualbody,v_actualbody,'r',u_model,v_model,'k')%%ÓãÌå²¨µÄÍ¼ the all fish body;
+% plot(u_actualbody,v_actualbody,'r',u_model,v_model,'k')%%é±¼ä½“æ³¢çš„å›¾ the all fish body;
 % title('body wave model and actualbody')
 % % body wave: check the fitness of a body wave  (raw data(rotated)   and reconfiguration data) at certain time 
 % 
 % num_time=1;%different time
 % figure
-% plot(u_actualbody(:,num_time),v_actualbody(:,num_time),'r',u_model(:,num_time),v_model(:,num_time),'k')%%ÓãÌå²¨µÄÍ¼
+% plot(u_actualbody(:,num_time),v_actualbody(:,num_time),'r',u_model(:,num_time),v_model(:,num_time),'k')%%é±¼ä½“æ³¢çš„å›¾
 % title('body wave model and actualbody of tail point')
 % raw data /body wave 
 body_xDatawave=fliplr(body_x);
 body_yDatawave=fliplr(body_y);
 for iiii=1:size(body_yDatawave,1)
-body_yDatawave(iiii,:)=body_yDatawave(iiii,:)+ (iiii-1)*5*ones(1,30);%%Æ«ÒÆÒ»¶Î¾àÀë
+body_yDatawave(iiii,:)=body_yDatawave(iiii,:)+ (iiii-1)*5*ones(1,30);%%åç§»ä¸€æ®µè·ç¦»
 end
 figure
-plot(body_xDatawave(str_frm_Interval,:)',body_yDatawave(str_frm_Interval,:)','k-')%%ÓãÌå²¨µÄÍ¼
+plot(body_xDatawave(str_frm_Interval,:)',body_yDatawave(str_frm_Interval,:)','k-')%%é±¼ä½“æ³¢çš„å›¾
 title('Actual body wave')
 % raw data /body wave 
 u_modelDatawave=fliplr(u_model);
 v_modelDatawave=fliplr(v_model);
 for iiii=1:size(v_modelDatawave,1)
-v_modelDatawave(iiii,:)=v_modelDatawave(iiii,:)+ (iiii-1)*5*ones(1,30);%%Æ«ÒÆÒ»¶Î¾àÀë
+v_modelDatawave(iiii,:)=v_modelDatawave(iiii,:)+ (iiii-1)*5*ones(1,30);%%åç§»ä¸€æ®µè·ç¦»
 end
 figure
-plot(u_modelDatawave(str_frm_Interval,:)',v_modelDatawave(str_frm_Interval,:)','k-')%%ÓãÌå²¨µÄÍ¼
+plot(u_modelDatawave(str_frm_Interval,:)',v_modelDatawave(str_frm_Interval,:)','k-')%%é±¼ä½“æ³¢çš„å›¾
 title('displaced model body wave')
-% theta = atan(U.Ave_ycom/U.Ave_xcom );%%ÔË¶¯·½Ïò¡£¡£¼´ÔË¶¯·½ÏòÓë´¹Ö±³Étheat½Ç¶È tempxÊµ¼ÊÊÇÍ¼Æ¬ÖĞµÄy×ø±ê¡£¡£tempyÊÇÏñËØÖĞµÄx
+% theta = atan(U.Ave_ycom/U.Ave_xcom );%%è¿åŠ¨æ–¹å‘ã€‚ã€‚å³è¿åŠ¨æ–¹å‘ä¸å‚ç›´æˆtheatè§’åº¦ tempxå®é™…æ˜¯å›¾ç‰‡ä¸­çš„yåæ ‡ã€‚ã€‚tempyæ˜¯åƒç´ ä¸­çš„x
 u_modelDatawave=fliplr(u_model);
 v_modelDatawave=fliplr(v_model);
 u_model_rotated=cos(-theta1)*u_modelDatawave+sin(-theta1)*v_modelDatawave;%%the axial direction
 v_model_rotated = -sin(-theta1)*u_modelDatawave+cos(-theta1)*v_modelDatawave;%the lateral direction
-A_rotated = (max(v_model_rotated (:,30))-min(v_model_rotated (:,30)))%%ÓãÎ²ÓÃYÊı¾İ  1±íÊ¾ÓãÎ²
+A_rotated = (max(v_model_rotated (:,30))-min(v_model_rotated (:,30)))%%é±¼å°¾ç”¨Yæ•°æ®  1è¡¨ç¤ºé±¼å°¾
 
 for iiii=1:size(v_model_rotated ,1)
-v_model_rotated (iiii,:)=v_model_rotated (iiii,:)+ (iiii-1)*5*ones(1,30);%%Æ«ÒÆÒ»¶Î¾àÀë
+v_model_rotated (iiii,:)=v_model_rotated (iiii,:)+ (iiii-1)*5*ones(1,30);%%åç§»ä¸€æ®µè·ç¦»
 end
 figure
-plot(u_model_rotated(str_frm_Interval,:)',v_model_rotated (str_frm_Interval,:)','k-')%%ÓãÌå²¨µÄÍ¼
+plot(u_model_rotated(str_frm_Interval,:)',v_model_rotated (str_frm_Interval,:)','k-')%%é±¼ä½“æ³¢çš„å›¾
 title('Rotated model body wave')
 Velocity_vector1=[50; 200];
 Velocity_vector2=[cos(-theta1) sin(-theta1); -sin(-theta1) cos(-theta1)]*[U.Ave_com(3);0]+Velocity_vector1;
@@ -228,11 +232,11 @@ text(Velocity_vector1(1),Velocity_vector1(2),'Average Velocity','FontSize',15,'C
 % 
 % % body wave: check the fitness of a body wave  (raw data(rotated)   and reconfiguration data)
 % figure
-% plot(u_actualbody,v_actualbody,'r',u_model,v_model,'k')%%ÓãÌå²¨µÄÍ¼ the all fish body
+% plot(u_actualbody,v_actualbody,'r',u_model,v_model,'k')%%é±¼ä½“æ³¢çš„å›¾ the all fish body
 % % body wave: check the fitness of a body wave  (raw data(rotated)   and reconfiguration data) at certain time 
 % num_time=1;%different 
 % figure
-% plot(u_actualbody(:,num_time),v_actualbody(:,num_time),'r',u_model(:,num_time),v_model(:,num_time),'k')%%ÓãÌå²¨µÄÍ¼
+% plot(u_actualbody(:,num_time),v_actualbody(:,num_time),'r',u_model(:,num_time),v_model(:,num_time),'k')%%é±¼ä½“æ³¢çš„å›¾
 % 
 % % check the fitness of all points for a single cycle period
 % time_variance=(strt_frm:num_per_cycle+strt_frm)*timestep;%the variance of time
@@ -245,17 +249,17 @@ text(Velocity_vector1(1),Velocity_vector1(2),'Average Velocity','FontSize',15,'C
 % body_xDatawave=body_x;
 % body_yDatawave=body_y;
 % for iiii=1:size(body_yDatawave,1)
-% body_yDatawave(iiii,:)=body_yDatawave(iiii,:)+ (iiii-1)*5*ones(1,30);%%Æ«ÒÆÒ»¶Î¾àÀë
+% body_yDatawave(iiii,:)=body_yDatawave(iiii,:)+ (iiii-1)*5*ones(1,30);%%åç§»ä¸€æ®µè·ç¦»
 % end
 % figure
-% plot(body_xDatawave(1:1:66,:)',body_yDatawave(1:1:66,:)','k-')%%ÓãÌå²¨µÄÍ¼
+% plot(body_xDatawave(1:1:66,:)',body_yDatawave(1:1:66,:)','k-')%%é±¼ä½“æ³¢çš„å›¾
 % 
 % % raw data /body wave 
 % u_modelDatawave=u_model;
 % v_modelDatawave=v_model;
 % for iiii=1:size(v_modelDatawave,1)
-% v_modelDatawave(iiii,:)=v_modelDatawave(iiii,:)+ (iiii-1)*5*ones(1,30);%%Æ«ÒÆÒ»¶Î¾àÀë
+% v_modelDatawave(iiii,:)=v_modelDatawave(iiii,:)+ (iiii-1)*5*ones(1,30);%%åç§»ä¸€æ®µè·ç¦»
 % end
 % figure
-% plot(u_modelDatawave(1:1:19,:)',v_modelDatawave(1:1:19,:)','k-')%%ÓãÌå²¨µÄÍ¼
+% plot(u_modelDatawave(1:1:19,:)',v_modelDatawave(1:1:19,:)','k-')%%é±¼ä½“æ³¢çš„å›¾
 
